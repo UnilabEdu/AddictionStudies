@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, current_app
 from addiction.models.staff import Staff
-from flask_login import current_user, login_required
-from addiction.utils import admin_required
+from flask_login import login_required
+import os
+
 
 main_blueprint=Blueprint('main', __name__, template_folder="templates")
 

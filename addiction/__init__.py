@@ -2,6 +2,7 @@ from flask import Flask
 from addiction.config import Config
 from addiction.views.main.routes import main_blueprint
 from addiction.views.auth.routes import auth_blueprint
+from addiction.views.publications.routes import publication_blueprint
 from addiction.extensions import db, migrate, login_manager, admin
 from addiction.commands import init_db, populate_db
 from addiction.models.user import User, Role
@@ -12,7 +13,7 @@ from flask_admin.base import MenuLink
 
 
 
-BLUEPRINTS=[main_blueprint, auth_blueprint]
+BLUEPRINTS=[main_blueprint, auth_blueprint, publication_blueprint]
 COMMANDS=[init_db, populate_db]
 
 

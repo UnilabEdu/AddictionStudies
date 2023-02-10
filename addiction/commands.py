@@ -3,7 +3,9 @@ import click
 from addiction.extensions import db
 from addiction.models.staff import Staff
 from addiction.models.user import User, UserRole, Role
-
+from flask import current_app
+from addiction.models.file import File
+import os
 
 @click.command("init_db")
 @with_appcontext
@@ -27,10 +29,9 @@ def populate_db():
 
     for member in staff_members:
         new_member = Staff(name=member[0], email=member[1], position=member[2])
-        db.session.add(new_member)
-    
         
-    db.session.commit()
+        new_member.create()
+
 
 
     click.echo("Creating users")
@@ -45,6 +46,65 @@ def populate_db():
     admin_role=Role.query.filter_by(name="admin").first()
     admin_user_role=UserRole(user_id=admin_user.id, role_id=admin_role.id)
     admin_user_role.create()
+
+
+    click.echo("Creating files")
+
+    #for linux
+    display_name=[
+        "ყურადღების ცენტრში: ფენტანილები და სხვა ახალი ოპიოიდები",
+        "ყურადღების ცენტრში: სინთეზური კანაბინოიდები" ,  
+        "ყურადღების ცენტრში: ფსიქოაქტიური ნივთიერებების მოხმარება და ფსიქიკური ჯანმრთელობის კომორბიდული პრობლემები",
+        "ხარისხის სტანდარტების დანერგვა ნარკოლოგიური სერვისებისა და სისტემებისთვის", 
+        "ნარკოტიკების ავადმოხმარების პრევენცია", 
+        "სამოქმედო ჩარჩო ნარკოტიკებთან დაკავშირებულ პრობლემებზე საპასუხო ჯანდაცვითი და სოციალური ზომების შემუშავებისა და განხორციელებისთვის",
+        "მედია, ფსიქიკური ჯანმრთელობა და ადამიანის უფლებები", 
+        "კანაფი: ჯანდაცვითი და სოციალური საპასუხო ზომები",
+        "ოპიოიდები: ჯანდაცვითი და სოციალური საპასუხო ზომები",
+        "ახალი ფსიქოაქტიური ნივთიერებები: ჯანდაცვითი და სოციალური საპასუხო ზომები", 
+        "სტიმულატორები: ჯანდაცვითი და სოციალური საპასუხო ზომები",
+        "ოპიოიდების მოხმარებასთან დაკავშირებული სიკვდილი: ჯანდაცვითი და სოციალური საპასუხო ზომები",
+        "წამლების არასამედიცინო დანიშნულებით გამოყენება: ჯანდაცვითი და სოციალური საპასუხო ზომები",
+        "ნარკოტიკების პოლიმოხმარება: ჯანდაცვითი და სოციალური საპასუხო ზომები",  
+        "Piloting Comprehensive Social Influence (‘Unplugged’) Program in Georgia: A", 
+        "‘Ten Years Later’ – Developing Institutional Mechanisms for Drug Demand Reduction and Addictology Education in Georgia – A Case Study ", 
+        "ჩანაცვლებითი თერაპიის სერვისებით მოსარგებლეთა კმაყოფილების კვლევა დასავლეთ საქართველოში", 
+        "პრევენციის ევროპული კურიკულუმი",
+
+    ]
+
+    #for windows
+    # display_name=[ "‘Ten Years Later’ – Developing Institutional Mechanisms for Drug Demand Reduction and Addictology Education in Georgia – A Case Study ", 
+    #                "Piloting Comprehensive Social Influence (‘Unplugged’) Program in Georgia: A", 
+    #                "სამოქმედო ჩარჩო ნარკოტიკებთან დაკავშირებულ პრობლემებზე საპასუხო ჯანდაცვითი და სოციალური ზომების შემუშავებისა და განხორციელებისთვის",
+    #                "ხარისხის სტანდარტების დანერგვა ნარკოლოგიური სერვისებისა და სისტემებისთვის", 
+    #                 "მედია, ფსიქიკური ჯანმრთელობა და ადამიანის უფლებები", 
+    #                 "ნარკოტიკების ავადმოხმარების პრევენცია", 
+    #                  "პრევენციის ევროპული კურიკულუმი",
+    #                 "ყურადღების ცენტრში: სინთეზური კანაბინოიდები" ,  
+    #                 "ყურადღების ცენტრში: ფენტანილები და სხვა ახალი ოპიოიდები",
+    #                 "ყურადღების ცენტრში: ფსიქოაქტიური ნივთიერებების მოხმარება და ფსიქიკური ჯანმრთელობის კომორბიდული პრობლემები",
+    #                 "ჩანაცვლებითი თერაპიის სერვისებით მოსარგებლეთა კმაყოფილების კვლევა დასავლეთ საქართველოში", 
+    #                 "კანაფი: ჯანდაცვითი და სოციალური საპასუხო ზომები",
+    #                 "ახალი ფსიქოაქტიური ნივთიერებები: ჯანდაცვითი და სოციალური საპასუხო ზომები", 
+    #                  "ნარკოტიკების პოლიმოხმარება: ჯანდაცვითი და სოციალური საპასუხო ზომები", 
+    #                  "სტიმულატორები: ჯანდაცვითი და სოციალური საპასუხო ზომები",
+    #                  "წამლების არასამედიცინო დანიშნულებით გამოყენება: ჯანდაცვითი და სოციალური საპასუხო ზომები", 
+    #                  "ოპიოიდების მოხმარებასთან დაკავშირებული სიკვდილი: ჯანდაცვითი და სოციალური საპასუხო ზომები",
+    #                  "ოპიოიდები: ჯანდაცვითი და სოციალური საპასუხო ზომები"
+    #               ]
+    relative='static/publications'
+    incomplete_path=os.path.join(current_app.config['BASE_DIR'], relative)
+    folder_names=os.listdir(incomplete_path)
+    i=0
+    for name in folder_names:
+        complete_path=os.path.join(incomplete_path, name)
+        files=os.listdir(complete_path)
+        for filename in files:
+            new_file=File(filename=filename, displayname=display_name[i], file_path=complete_path, category=name)
+            i+=1
+            new_file.create()
+
     
 
 
