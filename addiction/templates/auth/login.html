@@ -1,0 +1,26 @@
+{%extends "layouts/base.html"%}
+{%block head%}
+ავტორიზაცია
+{%endblock%}
+
+{%block content%}
+<form method="POST">
+    {{login_form.hidden_tag()}}
+    <div class="d-flex justify-content-center mt-5 mb-5">
+    <div class="col-md-5 col-lg-4 mt-3">
+        <form>
+            {{login_form.hidden_tag()}}
+            <div class="mb-3">
+                {{login_form.username(class="form-control", placeholder=login_form.username.label.text)}}
+            </div>
+            <div class="mb-3">
+                {{login_form.password(class="form-control", placeholder=login_form.password.label.text)}}
+            </div>
+            <div class="mb-3">
+                {{login_form.submit()}}
+            </div>   
+        </form>
+    </div>
+    </div>
+
+{%endblock%}
