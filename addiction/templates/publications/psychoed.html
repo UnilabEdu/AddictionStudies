@@ -1,0 +1,18 @@
+{%extends "layouts/base.html"%} {%block head%} ფსიქოგანათლება 
+{%endblock%} {%block content%}
+{%for i in psychoed%}
+<div class="card mb-5 text-center align-items-center">
+  <div class="card-body mt-3 col-md-4 col-lg-4" >
+    <p class="card-text"><a href="{{url_for('publication.view', pdf_name=i.filename)}}">{{i.displayname}}</a></p>
+  </div>
+  <div class="d-flex justify-content-center mt-3 mb-3">
+  <div class="col-md-2 col-lg-2 mb-3">
+  <a href="{{url_for('publication.get_file', category=i.category, pdf_name=i.filename)}}"><img src="{{ url_for('static', filename = 'images/img.png') }}" class="card-img-bottom" alt="..."></a>
+  </div>
+</div>
+</div>
+
+{%endfor%}
+
+
+{%endblock%}

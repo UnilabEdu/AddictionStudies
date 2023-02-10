@@ -3,6 +3,7 @@ from addiction.views.auth.forms import RegisterForm, LoginForm
 from addiction.models.user import User
 from flask_login import login_user, logout_user
 
+
 auth_blueprint=Blueprint('auth', __name__, template_folder='templates')
 
 @auth_blueprint.route('/register', methods=['GET', 'POST'])

@@ -45,18 +45,26 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="#">აკადემიური პუბლიკაციები</a>
-            </li>
-            <li><a class="dropdown-item" href="#">კვლევითი ანგარიშები</a></li>
-            <li>
-              <a class="dropdown-item" href="#">მკურნალობის გზამკვლევები</a>
+              <a class="dropdown-item {{is_active(request.endpoint, 'publication.academic')}}" href="{{url_for('publication.academic')}}">აკადემიური პუბლიკაციები</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">პრევენციის სახელმძღვანელოები</a>
+              <a class="dropdown-item {{is_active(request.endpoint, 'publication.research')}}" href="{{url_for('publication.research')}}">კვლევითი ანგარიშები</a>
             </li>
-            <li><a class="dropdown-item" href="#">ფსიქოგანათლება</a></li>
-            <li><a class="dropdown-item" href="#">წიგნები</a></li>
-            <li><a class="dropdown-item" href="#">წლიური ანგარიშები</a></li>
+            <li>
+              <a class="dropdown-item {{is_active(request.endpoint, 'publication.treatment')}}" href="{{url_for('publication.treatment')}}">მკურნალობის გზამკვლევები</a>
+            </li>
+            <li>
+              <a class="dropdown-item {{is_active(request.endpoint, 'publication.prevention')}}" href="{{url_for('publication.prevention')}}">პრევენციის სახელმძღვანელოები</a>
+            </li>
+            <li>
+              <a class="dropdown-item {{is_active(request.endpoint, 'publication.psychoed')}}" href="{{url_for('publication.psychoed')}}">ფსიქოგანათლება</a>
+            </li>
+            <li>
+              <a class="dropdown-item {{is_active(request.endpoint, 'publication.books')}}" href="{{url_for('publication.books')}}">წიგნები</a>
+            </li>
+            <li>
+              <a class="dropdown-item {{is_active(request.endpoint, 'publication.annual')}}" href="{{url_for('publication.annual')}}">წლიური ანგარიშები</a>
+            </li>
           </ul>
         </li>
         <li class="nav-item">
