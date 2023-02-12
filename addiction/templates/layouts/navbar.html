@@ -44,27 +44,11 @@
             რესურსები
           </a>
           <ul class="dropdown-menu">
+            {%for name in name_dict%}
             <li>
-              <a class="dropdown-item {{is_active(request.endpoint, 'publication.academic')}}" href="{{url_for('publication.academic')}}">აკადემიური პუბლიკაციები</a>
+              <a class="dropdown-item" href="{{url_for('publication.publication', category=name)}}">{{name_dict[name]}}</a>
             </li>
-            <li>
-              <a class="dropdown-item {{is_active(request.endpoint, 'publication.research')}}" href="{{url_for('publication.research')}}">კვლევითი ანგარიშები</a>
-            </li>
-            <li>
-              <a class="dropdown-item {{is_active(request.endpoint, 'publication.treatment')}}" href="{{url_for('publication.treatment')}}">მკურნალობის გზამკვლევები</a>
-            </li>
-            <li>
-              <a class="dropdown-item {{is_active(request.endpoint, 'publication.prevention')}}" href="{{url_for('publication.prevention')}}">პრევენციის სახელმძღვანელოები</a>
-            </li>
-            <li>
-              <a class="dropdown-item {{is_active(request.endpoint, 'publication.psychoed')}}" href="{{url_for('publication.psychoed')}}">ფსიქოგანათლება</a>
-            </li>
-            <li>
-              <a class="dropdown-item {{is_active(request.endpoint, 'publication.books')}}" href="{{url_for('publication.books')}}">წიგნები</a>
-            </li>
-            <li>
-              <a class="dropdown-item {{is_active(request.endpoint, 'publication.annual')}}" href="{{url_for('publication.annual')}}">წლიური ანგარიშები</a>
-            </li>
+            {%endfor%}
           </ul>
         </li>
         <li class="nav-item">
@@ -79,7 +63,7 @@
           <a
             class="nav-link {{is_active(request.endpoint, 'auth.login')}}"
             href="{{url_for('auth.login')}}"
-            >ავტორიზაცია</a
+            >შესვლა</a
           >
         </li>
         <li class="nav-item">
