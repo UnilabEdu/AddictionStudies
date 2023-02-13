@@ -39,4 +39,9 @@ class RoleModelView(SecureModelView):
     can_create=False
     can_edit=False
 
+class FileModelView(SecureModelView):
+    can_create=False
+    column_exclude_list=['filename', 'file_path']
+    
+
     
