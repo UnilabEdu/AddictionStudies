@@ -8,7 +8,9 @@ from addiction.commands import init_db, populate_db
 from addiction.models.user import User, Role
 from addiction.models.staff import Staff
 from addiction.models.file import File
-from addiction.adminpanel.models import SecureAdminView, UserModelView, StaffModelView, RoleModelView, FileModelView
+from addiction.models.home import Home
+from addiction.models.projects import Project
+from addiction.adminpanel.models import SecureAdminView, UserModelView, StaffModelView, RoleModelView, FileModelView, HomeModelView, ProjectModelView
 
 from flask_admin.base import MenuLink
 
@@ -43,10 +45,12 @@ def register_extensions(app):
     
     admin.index_view=SecureAdminView()
     admin.init_app(app)
+    admin.add_view(HomeModelView(Home, db.session))
     admin.add_view(StaffModelView(Staff, db.session))
     admin.add_view(UserModelView(User, db.session))
     admin.add_view(RoleModelView(Role, db.session))
     admin.add_view(FileModelView(File, db.session))
+    admin.add_view(ProjectModelView(Project, db.session))
     admin.add_link(MenuLink("Go back", url="/", icon_type="fa", icon_value="fa-sign-out"))
 
 

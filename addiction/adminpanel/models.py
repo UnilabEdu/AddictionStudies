@@ -15,6 +15,9 @@ class SecureAdminView(AdminIndexView):
     def is_accessible(self):
         return current_user.is_authenticated and current_user.has_role('admin')
     
+    def is_visible(self):
+        return False
+    
     def inaccessible_callback(self, name, **kwargs):
         if not self.is_accessible():
             return redirect(url_for("auth.login"))
@@ -42,6 +45,12 @@ class RoleModelView(SecureModelView):
 class FileModelView(SecureModelView):
     can_create=False
     column_exclude_list=['filename', 'file_path']
-    
+
+class HomeModelView(SecureModelView):
+    can_delete=False
+
+class ProjectModelView(SecureModelView):
+    can_delete=False
+
 
     
