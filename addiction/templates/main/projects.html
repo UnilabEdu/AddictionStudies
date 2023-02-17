@@ -2,3 +2,50 @@
 {%block head%}
 პროექტები
 {%endblock%}
+
+{%block content%}
+<div class="d-flex justify-content-center mt-5 mb-5">
+<div class="col-md-7 col-lg-6 mt-3">
+<table class="table borderless">
+    <tbody>
+      <tr>
+        <th>პროექტები</th>
+        <td>მიმდინარე პროექტები</td>
+    </tr>
+        {%for i in projects%}
+        {%if i.current%}
+        <tr>
+        <td></td>
+        <td>{{i.current}}</td>
+        </tr>
+        {%endif%}
+        {%endfor%}
+    </tbody>
+  </table>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <table class="table borderless">
+    <tbody>
+      <tr>
+        <th>პროექტები</th>
+        <td>განხორციელებული პროექტები</td>
+    </tr>
+        {%for i in projects%}
+        <tr>
+        <td></td>
+        <td>{{i.implemented}}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+  </table>
+</div>
+</div>
+ 
+  
+
+
+{%endblock%}
