@@ -2,3 +2,76 @@
 {%block head%}
 ადიქტოლოგიის ინსტიტუტი
 {%endblock%}
+{%block content%}
+<div class="d-flex justify-content-center mt-5 mb-5">
+<div class="col-md-7 col-lg-6 mt-3">
+<table class="table borderless">
+    <tbody>
+      <tr>
+        <th>ინსტიტუტის შესახებ</th>
+        <td><strong>ინსტიტუტის მანდატი: </strong>{{abt[0]}}</td>
+        </tr>
+        <tr>
+        <td></td>
+        <td><strong>ინსტიტუტის ხედვა:  </strong>{{abt[1]}}</td>
+        </tr>
+        <tr>
+        <td></td>
+        <td><strong>ინსტიტუტის მისია:  </strong>{{abt[2]}}</td>
+        </tr>
+        <tr>
+        <td></td>
+        <td><strong>ინსტიტუტის მიზანი:  </strong>{{abt[3]}}</td>
+        </tr>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <table class="table borderless">
+    <tbody>
+      <tr>
+        <th>მუშაობის მიმართულებები</th>
+        <td><li>{{dr[0]}}</li></td>
+        </tr>
+        <tr>
+        <td></td>
+        <td><li>{{dr[1]}}</li></td>
+        </tr>
+        <tr>
+        <td></td>
+        <td><li>{{dr[2]}}</li></td>
+        </tr>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  <div class="d-flex justify-content-center mt-5 mb-5">
+  <div class="col-md-7 col-lg-6 mt-3">
+  <table class="table borderless">
+    <tbody>
+      <tr>
+        <th>ინსტიტუტის შექმნის ისტორია</th>
+        <td>{{home[0].history}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+  
+
+
+{%endblock%}
