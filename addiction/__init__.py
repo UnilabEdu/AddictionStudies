@@ -3,7 +3,7 @@ from addiction.config import Config
 from addiction.views.main.routes import main_blueprint
 from addiction.views.auth.routes import auth_blueprint
 from addiction.views.publications.routes import publication_blueprint
-from addiction.extensions import db, migrate, login_manager, admin
+from addiction.extensions import db, migrate, login_manager, admin, mail
 from addiction.commands import init_db, populate_db
 from addiction.models.user import User, Role
 from addiction.models.staff import Staff
@@ -35,6 +35,7 @@ def register_blueprints(app):
 
 def register_extensions(app):
     db.init_app(app)
+    mail.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
     login_manager.login_view="auth.login"

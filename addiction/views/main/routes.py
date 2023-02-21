@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template, current_app
+from flask import Blueprint, render_template, current_app, flash
+from flask_login import current_user
 from addiction.models.staff import Staff
 from addiction.models.home import Home
 from addiction.models.projects import Project
 from flask_login import login_required
 import os
+
 
 
 main_blueprint=Blueprint('main', __name__, template_folder="templates")
@@ -18,6 +20,10 @@ def index():
     for i in home:
         abt.append(i.about)
         dr.append(i.directions)
+    if current_user.is_authenticated:
+        if current_user.confirmed==False:
+            flash("თქვენ არ გაქვთ მეილი დადასტურებული, რაც იმას ნიშნავს, რომ პაროლს თუ დაკარგავთ, მის აღდგენას ვეღარ შეძლებთ. ანგარიშის დასადასტურებლად შეამოწმეთ ელფოსტა. თუ მეილს ვერ პოულობთ, მოითხოვეთ ხელახლა გაგზავნა ")
+     
     return render_template("main/index.html", name_dict=name_dict, home=home, abt=abt, dr=dr)
 
 

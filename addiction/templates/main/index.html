@@ -3,6 +3,21 @@
 ადიქტოლოგიის ინსტიტუტი
 {%endblock%}
 {%block content%}
+{%for message in get_flashed_messages()%}
+{%if current_user.confirmed==False%}
+<div class="alert alert-danger" role="alert">
+  <span class="badge rounded-pill text-bg-danger">გაფრთხილება</span>
+  {{message}}
+  <span><a href="{{url_for('auth.resend_confirmation')}}">ამ ბმულზე</a></span>
+</div>
+{%else%}
+<div class="alert alert-success" role="alert">
+  <span class="badge text-bg-success">დადასტურებულია</span>
+  {{message}}
+</div>
+{%endif%}
+
+{%endfor%}
 <div class="d-flex justify-content-center mt-5 mb-5">
 <div class="col-md-7 col-lg-6 mt-3">
 <table class="table borderless">
