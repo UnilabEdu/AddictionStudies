@@ -22,13 +22,12 @@ def index():
         dr.append(i.directions)
     if current_user.is_authenticated:
         if current_user.confirmed==False:
-            flash("თქვენ არ გაქვთ მეილი დადასტურებული. ანგარიშის დასადასტურებლად შეამოწმეთ ელფოსტა. თუ მეილს ვერ პოულობთ, მოითხოვეთ ხელახლა გაგზავნა ")
+            flash("თქვენ არ გაქვთ მეილი დადასტურებული. ანგარიშის გასააქტიურებლად შეამოწმეთ ელფოსტა. თუ მეილს ვერ პოულობთ, მოითხოვეთ ხელახლა გაგზავნა ")
      
     return render_template("main/index.html", name_dict=name_dict, home=home, abt=abt, dr=dr)
 
 
 @main_blueprint.route("/projects")
-@login_required
 def projects():
     projects=Project.query.all()
     return render_template("main/projects.html", name_dict=name_dict, projects=projects)

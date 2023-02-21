@@ -22,6 +22,7 @@ def register():
         key=create_key(form.email.data)
         html=render_template('auth/_activation_message.html', key=key)
         send_email('ანგარიშის დადასტურება', html, form.email.data)
+        return redirect(url_for('auth.login'))
         
     return render_template("auth/register.html", form=form, name_dict=name_dict)
 
