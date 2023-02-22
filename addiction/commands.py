@@ -47,7 +47,7 @@ def populate_db():
 
 
     click.echo("Creating users")
-    admin_user=User(username="admin1", password='asdf')
+    admin_user=User(username="admin1", password='asdf', email='admin@gmail.com')
     admin_user.create()
 
     roles=['user', 'moderator', 'admin']
