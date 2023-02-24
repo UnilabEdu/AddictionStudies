@@ -58,30 +58,6 @@
             >ჩვენ შესახებ</a
           >
         </li>
-        {% if not current_user.is_authenticated %}
-        <li class="nav-item">
-          <a
-            class="nav-link {{is_active(request.endpoint, 'auth.login')}}"
-            href="{{url_for('auth.login')}}"
-            >შესვლა</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link {{is_active(request.endpoint, 'auth.register')}}"
-            href="{{url_for('auth.register')}}"
-            >რეგისტრაცია</a
-          >
-        </li>
-        {%else%}
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href=" {{ url_for('auth.logout') }}"
-            >გამოსვლა</a
-          >
-        </li>
-        {%endif%}
       </ul>
     </div>
   </div>

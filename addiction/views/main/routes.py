@@ -10,12 +10,6 @@ import os
 
 main_blueprint=Blueprint('main', __name__, template_folder="templates")
 
-@main_blueprint.before_app_request
-def email_not_confirmed():
-    if current_user.is_authenticated and not current_user.confirmed:
-        flash("თქვენ არ გაქვთ მეილი დადასტურებული. ანგარიშის გასააქტიურებლად შეამოწმეთ ელფოსტა. თუ მეილს ვერ პოულობთ, მოითხოვეთ ხელახლა გაგზავნა ")
-    elif current_user.is_authenticated and current_user.confirmed:
-        flash("თქვენი ელფოსტა წარმატებით დადასტურდა!")
 name_dict={"academic": "აკადემიური პუბლიკაციები", "annual":"წლიური ანგარიშები", "books": "წიგნები", "prevention":"პრევენციის სახელმძღვანელოები", "psychoed":"ფსიქოგანათლება", "research":"კვლევითი ანგარიშები", "treatment":"მკურნალობის გზამკვლევები"}
 
 
