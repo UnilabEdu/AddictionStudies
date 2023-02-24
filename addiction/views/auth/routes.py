@@ -22,8 +22,6 @@ def login():
                 return redirect(next)
             else:
                 return redirect(url_for("main.index"))
-        else:
-            print('couldnt login user')
     return render_template("auth/login.html", form=form, name_dict=name_dict)
 
 @auth_blueprint.route('/logout')
