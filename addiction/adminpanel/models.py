@@ -2,6 +2,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_admin import AdminIndexView
 from flask_login import current_user
 from flask import redirect, url_for
+from werkzeug.security import generate_password_hash
 
 class SecureModelView(ModelView):
     def is_accessible(self):
@@ -23,14 +24,21 @@ class SecureAdminView(AdminIndexView):
             return redirect(url_for("auth.login"))
 
 class UserModelView(SecureModelView):
-    # can_create=False
-    # can_edit=False
+    can_create=True
+    can_edit=False
     can_view_details=False
     column_searchable_list=['username']
-    column_exclude_list=['_password']
     column_list=['username', 'roles']
-    form_excluded_columns=['_password']
+    form_columns = ['email','username', 'password', 'roles']
     can_export=True
+
+    def on_model_change(self, form, model, is_created):
+        if is_created:
+            password = form.password.data
+            hashed_password = generate_password_hash(password)
+            model._password = hashed_password
+
+
     
 
 class StaffModelView(SecureModelView):

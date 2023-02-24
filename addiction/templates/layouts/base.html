@@ -10,22 +10,6 @@
   <body class="d-flex flex-column min-vh-100">
     {% include "layouts/navbar.html" %}
     
-    {% for message in get_flashed_messages() %}
-    {% if current_user.is_authenticated and current_user.confirmed %}
-        <div class="alert alert-success" role="alert">
-            <span class="badge rounded-pill text-bg-success">დადასტურებულია</span>
-            {{ message }}
-        </div>
-    {% endif %}
-
-    {% if current_user.is_authenticated and not current_user.confirmed %}
-        <div class="alert alert-danger" role="alert">
-            <span class="badge rounded-pill text-bg-danger">გაფრთხილება</span>
-            {{ message }}
-            <span><a href="{{ url_for('auth.resend_confirmation') }}">ამ ბმულზე</a></span>
-        </div>
-    {% endif %}
-{% endfor %}
       {% block content %}
       {%endblock%}
       {%include "layouts/footer.html"%}
