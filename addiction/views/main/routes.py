@@ -1,15 +1,9 @@
-from flask import Blueprint, render_template, current_app, flash, session
-from flask_login import current_user
+from flask import Blueprint, render_template
 from addiction.models.staff import Staff
 from addiction.models.home import Home
 from addiction.models.projects import Project
-from flask_login import login_required
-import os
-
-
 
 main_blueprint=Blueprint('main', __name__, template_folder="templates")
-
 name_dict={"academic": "აკადემიური პუბლიკაციები", "annual":"წლიური ანგარიშები", "books": "წიგნები", "prevention":"პრევენციის სახელმძღვანელოები", "psychoed":"ფსიქოგანათლება", "research":"კვლევითი ანგარიშები", "treatment":"მკურნალობის გზამკვლევები"}
 
 

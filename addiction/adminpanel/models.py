@@ -1,8 +1,12 @@
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import AdminIndexView
 from flask_login import current_user
-from flask import redirect, url_for
+from flask import redirect, url_for, render_template, current_app
 from werkzeug.security import generate_password_hash
+from addiction.emails import create_key, send_email, confirm_key
+from addiction.views.publications.forms import UploadForm
+from werkzeug.utils import secure_filename
+import os
 
 class SecureModelView(ModelView):
     def is_accessible(self):
@@ -25,7 +29,7 @@ class SecureAdminView(AdminIndexView):
 
 class UserModelView(SecureModelView):
     can_create=True
-    can_edit=False
+    can_edit=True
     can_view_details=False
     column_searchable_list=['username']
     column_list=['username', 'roles']
@@ -38,9 +42,12 @@ class UserModelView(SecureModelView):
             hashed_password = generate_password_hash(password)
             model._password = hashed_password
 
-
-    
-
+    def after_model_change(self, form, model, is_created):
+        if is_created:
+            key=create_key(form.email.data)
+            html=render_template('auth/_activation_message.html', key=key)
+            send_email('ანგარიშის დადასტურება', html, form.email.data)
+        
 class StaffModelView(SecureModelView):
     column_searchable_list=['name', 'email']
     column_editable_list=['position']
@@ -51,14 +58,26 @@ class RoleModelView(SecureModelView):
     can_edit=False
 
 class FileModelView(SecureModelView):
-    can_create=False
+    can_create=True
     column_exclude_list=['filename', 'file_path']
+    can_edit = True
+    can_delete = True
+    column_searchable_list = ['displayname']
+    column_filters = ['category']
+    form = UploadForm
+
+    def on_model_change(self, form, model, is_created):
+        if form.pdf.data:
+            filename = secure_filename(form.pdf.data.filename)
+            path = os.path.join(current_app.config['BASE_DIR'], 'static', 'publications', model.category, filename)
+            form.pdf.data.save(path)
+            model.filename = filename
+            model.file_path = path
 
 class HomeModelView(SecureModelView):
     can_delete=False
 
 class ProjectModelView(SecureModelView):
     can_delete=False
-
 
     

@@ -13,6 +13,9 @@ class User(BaseModel, UserMixin):
     _password=db.Column("password", (db.String))
     roles=db.relationship('Role', secondary="user_roles")
 
+    confirmed=db.Column(db.Boolean, default=False)
+    reset_password=db.Column(db.Boolean, default=False)
+
     def __repr__(self):
         return f"{self.name}"
     
@@ -44,4 +47,5 @@ class Role(BaseModel):
 
     def __repr__(self):
         return f"{self.name}"
+    
 

@@ -46,7 +46,7 @@
           <ul class="dropdown-menu">
             {%for name in name_dict%}
             <li>
-              <a class="dropdown-item" href="{{url_for('publication.publication', category=name)}}">{{name_dict[name]}}</a>
+              <a class="dropdown-item" href="{{url_for('publication.publication', folder=name)}}">{{name_dict[name]}}</a>
             </li>
             {%endfor%}
           </ul>

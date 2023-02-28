@@ -7,3 +7,4 @@ class UploadForm(FlaskForm):
     pdf=FileField(validators=[ FileAllowed ( ["pdf"])])
     upload=SubmitField('upload')
     displayname=StringField("მიუთითე დოკუმენტის სახელი (სავალდებულო)", validators=[DataRequired("დოკუმენტის სახელი სავალდებულოა"), length(min=3, max=500)])
+    category=StringField("მიუთითე კატეგორიის სახელი ინგლისურად (სავალდებულო)", validators=[DataRequired("კატეგორიის სახელი სავალდებულოა"), length(min=3, max=500)])

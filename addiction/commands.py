@@ -10,6 +10,7 @@ from addiction.models.file import File
 import os
 import csv
 from csv import reader, DictReader
+import pprint
 
 @click.command("init_db")
 @with_appcontext
@@ -61,23 +62,81 @@ def populate_db():
 
 
     click.echo("Creating files")
-    csv_path=os.path.join(current_app.config['BASE_DIR'], 'csvfiles', 'displaylinux.csv')
-
-    incomplete_path=os.path.join(current_app.config['BASE_DIR'], 'static', 'publications')
-    folder_names=os.listdir(incomplete_path)
-    display=[]
-    i=0
-    with open(csv_path, encoding="utf-8") as files_csv:
-        csv_reader= reader(files_csv, delimiter=",")
+    path=os.path.join(current_app.config['BASE_DIR'], 'csvfiles', 'file.csv')
+    with open(path, "r") as file_csv:
+        csv_reader= csv.DictReader(file_csv)
         for row in csv_reader:
-            display.append(row[0])
-        for name in folder_names:
-            complete_path=os.path.join(incomplete_path, name)
-            files=os.listdir(complete_path)
-            for filename in files:
-                new_file = File(filename=filename, displayname=display[i], file_path=complete_path, category=name)
-                i+=1
-                new_file.create()
+            new_file = File(filename=row['filename'], displayname=row['displayname'], category=row['category'], folder=row['folder'])
+            new_file.create()
+    
+    fields=['displayname', 'filename',  'category', 'folder']
+    f=[{"displayname":"ყურადღების ცენტრში: ფენტანილები და სხვა ახალი ოპიოიდები", 
+        "filename": "10 Spotlight on... Fentanyls and other new opioids_GEO_29.11.22.pdf", 
+        "category": "ფსიქოგანათლება", "folder":"psychoed"}, 
+        {"displayname": "ყურადღების ცენტრში: სინთეზური კანაბინოიდები", 
+         "filename": "09 Spotlight on... Synthetic Cannabinoids_GEO_29.11.22.pdf", 
+         "category": "ფსიქოგანათლება", "folder":"psychoed"}, 
+        {"displayname":"ყურადღების ცენტრში: ფსიქოაქტიური ნივთიერებების მოხმარება და ფსიქიკური ჯანმრთელობის კომორბიდული პრობლემები", 
+          "filename":"12 Spotlight on... Comorbid substance use and mental health problems_GEO_29.11.22.pdf", 
+          "category": "ფსიქოგანათლება", "folder":"psychoed"}, 
+        {"displayname": "ხარისხის სტანდარტების დანერგვა ნარკოლოგიური სერვისებისა და სისტემებისთვის", 
+         "filename":"07 Implementing quality standards for drug services and systems_GEO_29.11.22.pdf", 
+         "category": "წიგნები", "folder":"books"
+         }, 
+        {"displayname": "ნარკოტიკების ავადმოხმარების პრევენცია", 
+         "filename":"ნარკოტიკების ავადმოხმარების პრევენციის სახელმძღვანელო - 2017-2.pdf", 
+        "category": "წიგნები", "folder":"books"}, 
+        {"displayname":"სამოქმედო ჩარჩო ნარკოტიკებთან დაკავშირებულ პრობლემებზე საპასუხო ჯანდაცვითი და სოციალური ზომების შემუშავებისა და განხორციელებისთვის", 
+         "filename":"01 Action Framework GEO_29.11.22 .pdf", 
+         "category": "წიგნები", "folder":"books"}, 
+        {"displayname": "მედია, ფსიქიკური ჯანმრთელობა და ადამიანის უფლებები", 
+         "filename": "მედია, ფსიქიკური ჯანმრთელობა და ადამიანის უფლებები-ჯანა ჯავახიშვილი Final.pdf", 
+         "category": "წიგნები", "folder":"books"}, 
+         {"displayname": "კანაფი: ჯანდაცვითი და სოციალური საპასუხო ზომები", 
+          "filename":"02 Cannabis GEO_28.11.22.pdf", 
+          "category": "მკურნალობის გზამკვლევები", "folder":"treatment"}, 
+        {"displayname":"ოპიოიდები: ჯანდაცვითი და სოციალური საპასუხო ზომები",
+         "filename":"11 Opioids health and social responses_GEO_28.11.22.pdf", 
+         "category": "მკურნალობის გზამკვლევები", "folder":"treatment"},  
+        {"displayname":"ახალი ფსიქოაქტიური ნივთიერებები: ჯანდაცვითი და სოციალური საპასუხო ზომები", 
+         "filename":"03 New psychoactive substances health and social responses_GEO_28.11.22.pdf", 
+         "category": "მკურნალობის გზამკვლევები", "folder":"treatment"}, 
+         {"displayname":"სტიმულატორები: ჯანდაცვითი და სოციალური საპასუხო ზომები", 
+          "filename":"05 Stimulants health and social responses_GEO_28.11.22.pdf", 
+          "category": "მკურნალობის გზამკვლევები", "folder":"treatment"}, 
+        {"displayname":"ოპიოიდების მოხმარებასთან დაკავშირებული სიკვდილი: ჯანდაცვითი და სოციალური საპასუხო ზომები", 
+         "filename":"08 Opioid-related deaths health and social responses_GEO_28.11.22.pdf", 
+         "category": "მკურნალობის გზამკვლევები", "folder":"treatment"}, 
+        {"displayname":"წამლების არასამედიცინო დანიშნულებით გამოყენება: ჯანდაცვითი და სოციალური საპასუხო ზომები", 
+         "filename":"06 Non-medical use of medicines health and social responses_GEO_28.11.22.pdf", 
+         "category": "მკურნალობის გზამკვლევები", "folder":"treatment"}, 
+        {"displayname":"ნარკოტიკების პოლიმოხმარება: ჯანდაცვითი და სოციალური საპასუხო ზომები", 
+         "filename":"04 Polydrug use health and social responses_GEO_28.11.22.pdf", 
+         "category": "მკურნალობის გზამკვლევები", "folder":"treatment"}, 
+        {"displayname":"Piloting Comprehensive Social Influence (‘Unplugged’) Program in Georgia: A", 
+         "filename":"Pilot of Uplugged Program in Georgia.pdf", 
+         "category":"აკადემიური პუბლიკაციები", "folder":"academic"}, 
+        {"displayname":"‘Ten Years Later’ – Developing Institutional Mechanisms for Drug Demand Reduction and Addictology Education in Georgia – A Case Study", 
+         "filename":"addictology development in georgia - javakhishvili, otiashvili, kirtaedze, 2022.pdf", 
+         "category":"აკადემიური პუბლიკაციები", "folder":"academic"}, 
+        {"displayname":"ჩანაცვლებითი თერაპიის სერვისებით მოსარგებლეთა კმაყოფილების კვლევა დასავლეთ საქართველოში", 
+         "filename":"HR-Study-Rep-GEO-May 17.pdf", 
+         "category": "კვლევითი ანგარიშები", "folder":"research"}, 
+        {"displayname":"პრევენციის ევროპული კურიკულუმი", 
+         "filename":"EUPC_GEO_28.11.22_for web.pdf ", 
+         "category":"პრევენციის სახელმძღვანელოები", "folder":"prevention"}
+
+    ]   
+
+    # with open (os.path.join(current_app.config['BASE_DIR'], 'csvfiles', 'file.csv', ), mode='w', encoding="utf-8", newline="") as file_csv:
+    #     writer=csv.DictWriter(file_csv, fieldnames=fields)
+    #     writer.writeheader()
+    #     for row in f:
+    #         writer.writerow({k: f'"{v}"' if "," in str(v) else v for k, v in row.items()})
+
+
+
+
 
 
 

@@ -10,19 +10,19 @@ publication_blueprint=Blueprint('publication', __name__, template_folder="templa
 name_dict={"academic":"აკადემიური პუბლიკაციები", "annual":"წლიური ანგარიშები", "books": "წიგნები", "prevention":"პრევენციის სახელმძღვანელოები", "psychoed":"ფსიქოგანათლება", "research":"კვლევითი ანგარიშები", "treatment":"მკურნალობის გზამკვლევები"}
 
 
-@publication_blueprint.route("/publications/<string:category>", methods=['GET', 'POST'])
-def publication(category):
-    publications=File.query.filter_by(category=category).all()
+@publication_blueprint.route("/publications/<string:folder>", methods=['GET', 'POST'])
+def publication(folder):
+    publications=File.query.filter_by(folder=folder).all()
     form=UploadForm()
     if form.validate_on_submit():
         if form.pdf.data:
             filename=secure_filename(form.pdf.data.filename)
             displayname=form.displayname.data
-            path=os.path.join(current_app.config['BASE_DIR'], 'static/publications', category, filename)
+            path=os.path.join(current_app.config['BASE_DIR'], 'static', 'publications', folder, filename)
             form.pdf.data.save(path)
-            new_file=File(filename=filename, displayname=displayname, file_path=path, category=category)
+            new_file=File(filename=filename, displayname=displayname, file_path=path, folder=folder)
             new_file.create()
-    return render_template("publications/publications.html", publications=publications, name_dict=name_dict, category=category, form=form)
+    return render_template("publications/publications.html", publications=publications, name_dict=name_dict, folder=folder, form=form)
 
 
 
