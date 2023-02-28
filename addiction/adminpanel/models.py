@@ -59,7 +59,7 @@ class RoleModelView(SecureModelView):
 
 class FileModelView(SecureModelView):
     can_create=True
-    column_exclude_list=['filename', 'file_path']
+    column_exclude_list=['filename']
     can_edit = True
     can_delete = True
     column_searchable_list = ['displayname']
