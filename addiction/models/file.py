@@ -9,3 +9,4 @@ class File(BaseModel):
     displayname=db.Column(db.String(200))
     folder=db.Column(db.String(200))
     category=db.Column(db.String(200))
+    image=db.Column(db.String(200))

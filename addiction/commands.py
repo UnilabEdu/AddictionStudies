@@ -52,8 +52,9 @@ def populate_db():
     with open(path, "r") as file_csv:
         csv_reader= csv.DictReader(file_csv)
         for row in csv_reader:
-            new_file = File(filename=row['filename'], displayname=row['displayname'], category=row['category'], folder=row['folder'])
+            new_file = File(filename=row['filename'], displayname=row['displayname'], category=row['category'], folder=row['folder'], image=row['image'])
             new_file.create()
+    
 
 
     click.echo("Creating home")

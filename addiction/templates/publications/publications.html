@@ -27,7 +27,7 @@
   </div>
   <div class="d-flex justify-content-center mt-3 mb-3">
   <div class="col-md-2 col-lg-2 mb-3">
-  <a href="{{url_for('static', filename='publications/' + i.category +'/' + i.filename)}}"><img src="{{ url_for('static', filename = 'images/img.png') }}" class="card-img-bottom" alt="..."></a>
+  <a href="{{url_for('static', filename='publications/' + i.folder +'/' + i.filename)}}"><img src="{{ url_for('static', filename = 'images'+ '/' + i.image) }}" class="card-img-bottom" alt="..." style="min-width:200px"></a>
   </div>
 </div>
 </div>
