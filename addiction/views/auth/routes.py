@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request
-from addiction.views.auth.forms import RegisterForm, LoginForm, RecoveryForm, ResetPasswordForm
+from addiction.views.auth.forms import LoginForm, RecoveryForm, ResetPasswordForm
 from addiction.models.user import User
 from flask_login import login_user, logout_user, current_user
 from addiction.emails import create_key, send_email, confirm_key

@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, current_app
-from flask_login import login_required
 from addiction.models.file import File
 import os
 from addiction.views.publications.forms import UploadForm

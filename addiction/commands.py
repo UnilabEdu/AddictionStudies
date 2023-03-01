@@ -9,7 +9,6 @@ from flask import current_app
 from addiction.models.file import File
 import os
 import csv
-from csv import reader
 
 @click.command("init_db")
 @with_appcontext

@@ -3,7 +3,7 @@ from flask_admin import AdminIndexView
 from flask_login import current_user
 from flask import redirect, url_for, render_template, current_app
 from werkzeug.security import generate_password_hash
-from addiction.emails import create_key, send_email, confirm_key
+from addiction.emails import create_key, send_email
 from addiction.views.publications.forms import UploadForm
 from werkzeug.utils import secure_filename
 import os
@@ -77,7 +77,6 @@ class FileModelView(SecureModelView):
             form.pdf.data.save(path)
             model.filename = filename
             model.category=category
-            model.file_path = path
 
 class HomeModelView(SecureModelView):
     can_delete=False
