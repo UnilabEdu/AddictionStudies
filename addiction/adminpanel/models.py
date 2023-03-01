@@ -69,7 +69,7 @@ class FileModelView(SecureModelView):
     def on_model_change(self, form, model, is_created):
         if form.pdf.data:
             filename = secure_filename(form.pdf.data.filename)
-            path = os.path.join(current_app.config['BASE_DIR'], 'static', 'publications', model.category, filename)
+            path = os.path.join(current_app.config['BASE_DIR'], 'static', 'publications', model.folder, filename)
             form.pdf.data.save(path)
             model.filename = filename
             model.file_path = path
