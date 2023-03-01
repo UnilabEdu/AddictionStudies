@@ -1,24 +1,5 @@
 {%extends "layouts/base.html"%} {%block head%} {{name_dict[category]}}
 {%endblock%} {%block content%}
-{% if current_user.is_authenticated and current_user.has_role('admin')%}
-<form method="POST" enctype="multipart/form-data">
-{{form.hidden_tag()}}
-<div class="d-flex justify-content-center mt-5 mb-5">
-  <div class="col-md-5 col-lg-4 mt-3">
-          <div class="mb-3">
-            {{form.pdf(class="form-control", accept=".pdf")}}
-          </div>
-          <div class="mb-3">
-            {{form.displayname(class="form-control", placeholder=form.displayname.label.text)}}
-          </div>
-          <div class="mb-3">
-            {{form.upload(class="btn btn-primary mt-2")}}
-          </div>   
-  </div>
-</div>
-</form>
-{%endif%}
-<br>
 
 {%for i in publications%}
 <div class="card mb-5 text-center align-items-center">

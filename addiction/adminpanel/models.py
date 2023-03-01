@@ -70,12 +70,15 @@ class FileModelView(SecureModelView):
     form = UploadForm
 
     def on_model_change(self, form, model, is_created):
-        if form.pdf.data:
+        if form.pdf.data and form.image.data:
             filename = secure_filename(form.pdf.data.filename)
+            image=secure_filename(form.image.data.filename)
             category=name_dict[model.folder]
             path = os.path.join(current_app.config['BASE_DIR'], 'static', 'publications', model.folder, filename)
             form.pdf.data.save(path)
+            form.image.data.save(path)
             model.filename = filename
+            model.image=image
             model.category=category
 
 class HomeModelView(SecureModelView):
