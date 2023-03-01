@@ -8,6 +8,9 @@ from addiction.views.publications.forms import UploadForm
 from werkzeug.utils import secure_filename
 import os
 
+name_dict={"academic":"აკადემიური პუბლიკაციები", "annual":"წლიური ანგარიშები", "books": "წიგნები", "prevention":"პრევენციის სახელმძღვანელოები", "psychoed":"ფსიქოგანათლება", "research":"კვლევითი ანგარიშები", "treatment":"მკურნალობის გზამკვლევები"}
+
+
 class SecureModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated and current_user.has_role('admin')
@@ -69,9 +72,11 @@ class FileModelView(SecureModelView):
     def on_model_change(self, form, model, is_created):
         if form.pdf.data:
             filename = secure_filename(form.pdf.data.filename)
+            category=name_dict[model.folder]
             path = os.path.join(current_app.config['BASE_DIR'], 'static', 'publications', model.folder, filename)
             form.pdf.data.save(path)
             model.filename = filename
+            model.category=category
             model.file_path = path
 
 class HomeModelView(SecureModelView):
