@@ -7,11 +7,9 @@ from sqlalchemy import or_
 
 
 class RegisterForm(FlaskForm):
-    email = EmailField('ელფოსტა',[DataRequired('ელფოსტა სავალდებულოა'), Email(message='არავალიდური იმეილი')])
-    username=StringField("მომხმარებლის სახელი", validators=[DataRequired("მომხმარებლის სახელი სავალდებულოა")])
-    password=PasswordField("პაროლი", validators=[DataRequired("პაროლი სავალდებულოა"), length(min=8, max=16)])
-    confirm_password=PasswordField("დაადასტურეთ პაროლი", validators=[DataRequired("პაროლის დადასტურება სავალდებულოა"), equal_to("password", message="პაროლები არ ემთხვევა ერთმანეთს")])
-    submit=SubmitField('რეგისტრაცია')
+    email = EmailField('ელფოსტა',[DataRequired(), Email()])
+    username=StringField("მომხმარებლის სახელი", validators=[DataRequired()])
+    password=PasswordField("პაროლი", validators=[DataRequired(), length(min=8, max=16)])
 
     def validate_username(self, username):
         if User.query.filter_by(username=username.data).first():
