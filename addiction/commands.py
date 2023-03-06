@@ -25,7 +25,7 @@ def populate_db():
     click.echo("Creating staff")
     
     path=os.path.join(current_app.config['BASE_DIR'], 'csvfiles', 'staff.csv')
-    with open(path, "r") as staff_csv:
+    with open(path, "r", encoding='UTF-8') as staff_csv:
         csv_reader= csv.DictReader(staff_csv)
         for row in csv_reader:
             new_member = Staff(name=row['name'], email=row['email'], position=row['position'])
@@ -49,7 +49,7 @@ def populate_db():
 
     click.echo("Creating files")
     path=os.path.join(current_app.config['BASE_DIR'], 'csvfiles', 'file.csv')
-    with open(path, "r") as file_csv:
+    with open(path, "r",  encoding='UTF-8') as file_csv:
         csv_reader= csv.DictReader(file_csv)
         for row in csv_reader:
             new_file = File(filename=row['filename'], displayname=row['displayname'], category=row['category'], folder=row['folder'], image=row['image'])
@@ -60,7 +60,7 @@ def populate_db():
     click.echo("Creating home")
     
     path=os.path.join(current_app.config['BASE_DIR'], 'csvfiles', 'home.csv')
-    with open(path, 'r') as home_csv:
+    with open(path, 'r',  encoding='UTF-8') as home_csv:
         csv_reader= csv.DictReader(home_csv)
         for row in csv_reader:
             new_item= Home(about=row['about'], directions=row['directions'], history=row['history'])
@@ -70,7 +70,7 @@ def populate_db():
     click.echo("Creating Projects")
 
     path=os.path.join(current_app.config['BASE_DIR'], 'csvfiles', 'projects.csv')
-    with open(path, 'r') as projects_csv:
+    with open(path, 'r',  encoding='UTF-8') as projects_csv:
         csv_reader= csv.DictReader(projects_csv)
         for row in csv_reader:
             new_project= Project(current=row['current'], implemented=row['implemented'])

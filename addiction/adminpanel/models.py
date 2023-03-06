@@ -75,8 +75,9 @@ class FileModelView(SecureModelView):
             image=secure_filename(form.image.data.filename)
             category=name_dict[model.folder]
             path = os.path.join(current_app.config['BASE_DIR'], 'static', 'publications', model.folder, filename)
+            image_path = os.path.join(current_app.config['BASE_DIR'], 'static', 'images', image)
             form.pdf.data.save(path)
-            form.image.data.save(path)
+            form.image.data.save(image_path)
             model.filename = filename
             model.image=image
             model.category=category
