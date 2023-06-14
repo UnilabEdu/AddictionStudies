@@ -7,5 +7,6 @@ class File(BaseModel):
     id=db.Column(db.Integer, primary_key=True)
     filename=db.Column(db.String(200))
     displayname=db.Column(db.String(200))
-    file_path=db.Column(db.String(500))
+    folder=db.Column(db.String(200))
     category=db.Column(db.String(200))
+    image=db.Column(db.String(200))
