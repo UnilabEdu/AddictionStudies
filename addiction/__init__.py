@@ -5,7 +5,7 @@ from addiction.config import Config
 from addiction.extensions import db, login_manager, migrate, mail
 from addiction.views import main_blueprint, auth_blueprint, publication_blueprint
 from addiction.commands import init_db, populate_db
-from addiction.admin import admin, SecureModelView, ProjectView, HomeView, PublicationView, StaffView, CategoryView
+from addiction.admin import admin, SecureModelView, ProjectView, HomeView, PublicationView, StaffView, CategoryView, UserView
 from addiction.models import User, Staff, Project, HomePageText, Publication, PublicationCategory
 
 
@@ -57,7 +57,7 @@ def initialize_extensions(app):
 
     # Flask-Admin
     admin.init_app(app)
-    admin.add_view(SecureModelView(User, db.session, name="მომხმარებლები"))
+    admin.add_view(UserView(User, db.session, name="მომხმარებლები"))
     admin.add_view(HomeView(HomePageText, db.session, name="მთავარი"))
     admin.add_view(ProjectView(Project, db.session, name="პროექტები"))
     admin.add_view(CategoryView(PublicationCategory, db.session, name="რესურსები"))

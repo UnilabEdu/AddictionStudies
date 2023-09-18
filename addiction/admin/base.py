@@ -6,7 +6,7 @@ from flask import redirect, url_for
 
 class SecureModelView(ModelView):
     def is_accessible(self):
-        return current_user.is_authenticated and current_user.has_role('admin')
+        return current_user.is_authenticated
 
     def inaccessible_callback(self, name, **kwargs):
         if not self.is_accessible():
@@ -15,7 +15,7 @@ class SecureModelView(ModelView):
 
 class SecureIndexView(AdminIndexView):
     def is_accessible(self):
-        return current_user.is_authenticated and current_user.has_role('admin')
+        return current_user.is_authenticated
 
     def is_visible(self):
         return False
