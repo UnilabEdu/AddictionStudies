@@ -1,23 +1,30 @@
-from os import path, environ
-
+import os
 
 
 class Config(object):
-    SECRET_KEY=environ.get('SECRET_KEY')
-    BASE_DIR=path.abspath(path.dirname(__file__))
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
-    SQLALCHEMY_DATABASE_URI='sqlite:///'+path.join(BASE_DIR, 'db.sqlite')
-    FLASK_ADMIN_SWATCH='united'
-    
-    MAIL_SERVER='smtp.gmail.com'
-    MAIL_PORT = 587
-    MAIL_USERNAME = environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
-    MAIL_USE_TLS = True
-    MAIL_USE_SSL = False
+    PROJECT = "Addiction Studies"
+    PROJECT_NAME = "Addiction Studies"
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
+    SECRET_KEY = "TEMPORARY_SECRET_KEY"
+    CSRF_ENABLED = True
+
+    # Flask-SQLAlchemy
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    DB_USER = os.environ.get("DB_USER")
+    DB_PASS = os.environ.get("DB_PASS")
+    if os.environ.get('FLASK_DB') == "local":
+        SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(PROJECT_ROOT, 'db.sqlite')
+    elif os.environ.get("FLASK_DB") == "prod":
+        SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USER}:{DB_PASS}@0.0.0.0/public'
+
+    # Flask-Admin
+    FLASK_ADMIN_SWATCH = 'united'
 
 
-class Constants:
-    SERIALIZER_SALT='12345678'
+class Constants(object):
 
-
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+    SERIALIZER_SALT = 'TEMPORARY_SERIALIZER_SALT'
+    PUBLICATIONS_FOLDER = os.path.join(PROJECT_ROOT, "static", "publications")
+    IMAGES_FOLDER = os.path.join(PROJECT_ROOT, "static", "images")

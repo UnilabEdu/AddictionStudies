@@ -1,5 +1,11 @@
-{%macro is_active(endpoint, name)%}
-{%if endpoint == name%}
-active
-{%endif%}
-{%endmacro%}
+{% macro is_active() %}
+    {% set endpoints = varargs %}
+    {% set active_endpoint = "" %}
+
+    {% for endpoint in endpoints -%}
+        {% if request.endpoint and request.endpoint.endswith(endpoint) %}
+            active
+        {% endif %}
+    {% endfor %}
+
+{% endmacro %}

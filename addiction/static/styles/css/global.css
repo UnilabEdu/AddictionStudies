@@ -1,0 +1,445 @@
+@charset "UTF-8";
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-decoration: none;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+@font-face {
+  font-family: "BookNino";
+  src: url(../../fonts/bpg_nino_mtavruli_bold.otf) format("openType");
+  font-display: swap;
+}
+@font-face {
+  font-family: "FontNino";
+  src: url(../../fonts/bpg-nino-mtavruli-webfont.ttf) format("openType");
+  font-display: swap;
+}
+@font-face {
+  font-family: "firaGo";
+  src: url(../../fonts/FiraGO-Book.otf) format("openType");
+  font-display: swap;
+}
+body {
+  font-family: "BookNino";
+  color: #000;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1920px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 23.8rem;
+  margin: 0 15.2rem;
+  /* MOBILE */
+}
+header.border {
+  border-bottom: 1px solid #000;
+}
+header .header-title-box {
+  max-width: 59rem;
+}
+header .header-title-box h2 {
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: normal;
+}
+header .header-title-box p {
+  color: rgba(0, 0, 0, 0.7);
+  font-family: "firaGo";
+  text-align: justify;
+  font-size: 2.1rem;
+  font-weight: 350;
+  line-height: normal;
+}
+header .header-nav-box {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding-top: 5rem;
+  gap: 5.8rem;
+}
+header .header-nav-box a:link, header .header-nav-box a:visited {
+  display: inline-block;
+  font-size: 3rem;
+  color: #000;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 4.8rem;
+}
+header .header-nav-box .active {
+  box-shadow: inset 0 -0.5rem 0 0 #ff9900;
+}
+header .btn-mobile-nav {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: none;
+}
+header .close {
+  display: none;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+main .main-container {
+  margin: 0 15.2rem;
+}
+main .main-container img {
+  max-width: 100%;
+}
+main .main-container .main-box {
+  margin: 10rem 0;
+}
+main .main-container .main-box-subtitle {
+  font-size: 4.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 4.8rem;
+  margin-bottom: 2.4rem;
+}
+main .main-container .main-box-line {
+  width: 57.9rem;
+  height: 0.8rem;
+  background: #ff9900;
+  margin-left: -15.2rem;
+}
+main .main-container .main-box-texts {
+  margin: 3.3rem 0 0 42.9rem;
+}
+main .main-container .main-box-texts-el {
+  font-family: "FiraGO";
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 3.5rem;
+  margin-bottom: 4.3rem;
+}
+main .main-container .main-box-texts-el span {
+  text-align: justify;
+  font-family: "bookNino";
+  font-weight: 700;
+}
+main .main-container .main-box-texts-el span::after {
+  content: attr(colon);
+  font-weight: 400;
+}
+main .main-container .main-box-texts-el a {
+  color: #000;
+  font-family: "FiraGO";
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 4.8rem;
+  text-decoration-line: underline;
+}
+main .main-container .main-box-texts-el li::before {
+  content: "•";
+  color: black;
+  display: inline-block;
+  margin: 0 2rem;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3.8rem;
+  padding: 10rem;
+  background-color: #000;
+  color: #fff;
+  font-style: normal;
+  line-height: 4rem;
+  font-family: "FontNino";
+  font-weight: 400;
+  text-align: center;
+}
+footer .mail-box {
+  display: flex;
+  align-items: center;
+  gap: 2.7rem;
+}
+footer .mail-box .mail {
+  font-size: 2.8rem;
+  letter-spacing: 0.084rem;
+}
+footer .mail-box .mailLogo1 {
+  width: 5rem;
+  height: 5rem;
+}
+footer .address {
+  font-size: 2.5rem;
+  letter-spacing: 0.075rem;
+}
+footer .icons-box {
+  display: flex;
+  gap: 1.5rem;
+}
+footer .icons-box .fbLogo {
+  width: 6rem;
+  height: 6.1rem;
+}
+footer .icons-box .mailLogo2 {
+  width: 5.7rem;
+  height: 5.7rem;
+}
+footer .icons-box .img-fixed {
+  margin-top: -0.4rem;
+}
+footer .sub-text {
+  font-size: 1.5rem;
+  letter-spacing: 0.045rem;
+  font-weight: 400;
+}
+footer .sub-text a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+}
+
+@media (max-width: 109em) {
+  html {
+    font-size: 50%;
+  }
+}
+@media (max-width: 87.5em) {
+  html {
+    font-size: 43.75%;
+  }
+  header .header-nav-box {
+    gap: 4rem;
+  }
+}
+@media (max-width: 75em) {
+  html {
+    font-size: 37.5%;
+  }
+  header {
+    margin: 0 8.8rem;
+  }
+  header .header-nav-box {
+    gap: 2rem;
+  }
+  main .main-container {
+    margin: 0 8.8rem;
+  }
+}
+@media (max-width: 62.5em) {
+  html {
+    font-size: 28.125%;
+  }
+}
+@media (max-width: 43.75em) {
+  header {
+    margin: 0 2.8rem;
+  }
+  header .btn-mobile-nav {
+    display: block;
+    z-index: 999;
+  }
+  header .header-nav {
+    background-color: #fff;
+    position: absolute;
+    top: 15px;
+    right: 0;
+    height: 91rem;
+    transform: translateX(0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+  header .header-nav .header-nav-box {
+    flex-direction: column;
+    gap: 12.6rem;
+    padding: 0 25.3rem;
+  }
+  header .header-nav .header-nav-box a {
+    font-size: 4rem;
+  }
+  .nav-open {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .nav-open .header-nav {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  .nav-open .close {
+    display: block;
+  }
+  .nav-open .menu {
+    display: none;
+  }
+  main .main-container {
+    margin: 0 2.8rem;
+  }
+  main .main-container .main-box-texts {
+    margin-left: 0;
+  }
+  footer .sub-text {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 21.875em) {
+  html {
+    font-size: 22.25%;
+  }
+}/*# sourceMappingURL=global.css.map */

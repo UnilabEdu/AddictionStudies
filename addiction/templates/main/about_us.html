@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+
+{% block body %}
+
+    <main>
+        <div class="main-container">
+            <div class="main-box">
+                <h2 class="main-box-subtitle">ჩვენ შესახებ</h2>
+                <div class="main-box-line"></div>
+                <div class="main-box-texts">
+                    {% for member in staff_members %}
+                        <div class="main-box-texts-el">
+                            <p>
+                                <span>{{ member.name }},</span>
+                                {{ member.position }}
+                                <br>
+                                საკონტაქტო ინფორმაცია
+                                <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

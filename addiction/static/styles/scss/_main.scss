@@ -1,0 +1,227 @@
+body {
+  font-family: "BookNino";
+  color: #000;
+
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1920px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 23.8rem;
+  margin: 0 15.2rem;
+
+  &.border {
+    border-bottom: 1px solid #000;
+  }
+
+  .header-title-box {
+    max-width: 59rem;
+
+    h2 {
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    p {
+      color: rgba(0, 0, 0, 0.7);
+      font-family: "firaGo";
+      text-align: justify;
+      font-size: 2.1rem;
+      font-weight: 350;
+      line-height: normal;
+    }
+  }
+
+  .header-nav-box {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding-top: 5rem;
+    gap: 5.8rem;
+
+    a {
+      &:link,
+      &:visited {
+        display: inline-block;
+        font-size: 3rem;
+        color: #000;
+        text-decoration: none;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 4.8rem;
+      }
+    }
+
+    .active {
+      box-shadow: inset 0 -0.5rem 0 0 $mainOrange;
+    }
+  }
+
+  /* MOBILE */
+  .btn-mobile-nav {
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    display: none;
+  }
+
+  .close {
+    display: none;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .main-container {
+    margin: 0 15.2rem;
+
+    img {
+      max-width: 100%;
+    }
+
+    .main-box {
+      margin: 10rem 0;
+
+      &-subtitle {
+        font-size: 4.5rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 4.8rem;
+        margin-bottom: 2.4rem;
+      }
+
+      &-line {
+        width: 57.9rem;
+        height: 0.8rem;
+        background: $mainOrange;
+        margin-left: -15.2rem;
+      }
+
+      &-texts {
+        margin: 3.3rem 0 0 42.9rem;
+
+        &-el {
+          font-family: "FiraGO";
+          font-size: 2.5rem;
+          font-style: normal;
+          font-weight: 300;
+          line-height: 3.5rem;
+          margin-bottom: 4.3rem;
+
+          span {
+            text-align: justify;
+            font-family: "bookNino";
+            font-weight: 700;
+
+            &::after {
+              content: attr(colon);
+              font-weight: 400;
+            }
+          }
+
+          a {
+            color: #000;
+            font-family: "FiraGO";
+            font-size: 2.5rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 4.8rem;
+            text-decoration-line: underline;
+          }
+
+          li::before {
+            content: "\2022";
+            color: black;
+            display: inline-block;
+            margin: 0 2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3.8rem;
+  padding: 10rem;
+  background-color: #000;
+  color: #fff;
+  font-style: normal;
+  line-height: 4rem;
+  font-family: "FontNino";
+  font-weight: 400;
+  text-align: center;
+
+  .mail-box {
+    display: flex;
+    align-items: center;
+    gap: 2.7rem;
+
+    .mail {
+      font-size: 2.8rem;
+      letter-spacing: 0.084rem;
+    }
+
+    .mailLogo1 {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+
+  .address {
+    font-size: 2.5rem;
+    letter-spacing: 0.075rem;
+  }
+
+  .icons-box {
+    display: flex;
+    gap: 1.5rem;
+
+    .fbLogo {
+      width: 6rem;
+      height: 6.1rem;
+    }
+
+    .mailLogo2 {
+      width: 5.7rem;
+      height: 5.7rem;
+    }
+
+    .img-fixed {
+      margin-top: -0.4rem;
+    }
+  }
+
+  .sub-text {
+    font-size: 1.5rem;
+    letter-spacing: 0.045rem;
+    font-weight: 400;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 700;
+    }
+  }
+}

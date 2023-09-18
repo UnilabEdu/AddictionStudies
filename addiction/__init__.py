@@ -1,60 +1,80 @@
-from flask import Flask
+from flask import Flask, render_template, redirect, request, url_for
+from flask_admin.menu import MenuLink
+
 from addiction.config import Config
-from addiction.views.main.routes import main_blueprint
-from addiction.views.auth.routes import auth_blueprint
-from addiction.views.publications.routes import publication_blueprint
-from addiction.extensions import db, migrate, login_manager, admin, mail
+from addiction.extensions import db, login_manager, migrate, mail
+from addiction.views import main_blueprint, auth_blueprint, publication_blueprint
 from addiction.commands import init_db, populate_db
-from addiction.models.user import User, Role
-from addiction.models.staff import Staff
-from addiction.models.file import File
-from addiction.models.home import Home
-from addiction.models.projects import Project
-from addiction.adminpanel.models import SecureAdminView, UserModelView, StaffModelView, RoleModelView, FileModelView, HomeModelView, ProjectModelView
-from flask_admin.base import MenuLink
+from addiction.admin import admin, SecureModelView, ProjectView, HomeView, PublicationView, StaffView, CategoryView
+from addiction.models import User, Staff, Project, HomePageText, Publication, PublicationCategory
 
 
+BLUEPRINTS = [
+    main_blueprint,
+    auth_blueprint,
+    publication_blueprint
+]
 
-BLUEPRINTS=[main_blueprint, auth_blueprint, publication_blueprint]
-COMMANDS=[init_db, populate_db]
+COMMANDS = [
+    init_db,
+    populate_db
+]
 
 
 def create_app():
-    app=Flask(__name__)
+    app = Flask(__name__)
     app.config.from_object(Config)
 
+    initialize_extensions(app)
     register_blueprints(app)
-    register_extensions(app)
     register_commands(app)
+    configure_error_handlers(app)
+
     return app
+
+
+def initialize_extensions(app):
+    # Flask-SQLAlchemy
+    db.init_app(app)
+
+    # # Flask-Login
+    login_manager.init_app(app)
+    login_manager.login_view = "auth.login"
+
+    @login_manager.user_loader
+    def load_user(_id):
+        return User.query.get(_id)
+
+    @login_manager.unauthorized_handler
+    def unauthorized_callback():
+        return redirect(url_for('auth.login', next=request.path))
+
+    # Flask-Migrate
+    migrate.init_app(app, db)
+
+    # Flask-Mail
+    mail.init_app(app)
+
+    # Flask-Admin
+    admin.init_app(app)
+    admin.add_view(SecureModelView(User, db.session, name="მომხმარებლები"))
+    admin.add_view(HomeView(HomePageText, db.session, name="მთავარი"))
+    admin.add_view(ProjectView(Project, db.session, name="პროექტები"))
+    admin.add_view(CategoryView(PublicationCategory, db.session, name="რესურსები"))
+    admin.add_view(StaffView(Staff, db.session, name="ჩვენს შესახებ"))
+    admin.add_view(PublicationView(Publication, db.session, name="პუბლიკაციები"))
+    admin.add_link(MenuLink("გამოსვლა", url="/logout", icon_type="fa", icon_value="fa-sign-out"))
+
 
 def register_blueprints(app):
     for blueprint in BLUEPRINTS:
         app.register_blueprint(blueprint)
 
-def register_extensions(app):
-    db.init_app(app)
-    mail.init_app(app)
-    migrate.init_app(app, db)
-    login_manager.init_app(app)
-    login_manager.login_view="auth.login"
-
-    @login_manager.user_loader
-    def load_user(_id):
-        return User.query.get(_id)
-    
-    admin.index_view=SecureAdminView()
-    admin.init_app(app)
-    admin.add_view(HomeModelView(Home, db.session))
-    admin.add_view(StaffModelView(Staff, db.session))
-    admin.add_view(UserModelView(User, db.session))
-    admin.add_view(RoleModelView(Role, db.session))
-    admin.add_view(FileModelView(File, db.session))
-    admin.add_view(ProjectModelView(Project, db.session))
-    admin.add_link(MenuLink("Go back", url="/", icon_type="fa", icon_value="fa-sign-out"))
-
-
 
 def register_commands(app):
     for command in COMMANDS:
         app.cli.add_command(command)
+
+
+def configure_error_handlers(app):
+    pass

@@ -1,0 +1,33 @@
+{% extends "layouts/base.html" %}
+
+{% block body %}
+
+    <main>
+        <div class="main-container">
+            <div class="main-box">
+                <h2 class="main-box-subtitle">რესურსები</h2>
+                <div class="main-box-line"></div>
+                <div class="main-box-texts">
+                    <div class="main-box-texts-el">
+                        <p>
+                            ილიას სახელმწიფო უნივერსიტეტის ტომაშ ზაბრანსკის სახელობის
+                            ადიქტოლოგიის ინსტიტუტის პუბლიკაციები კატეგორიების მიხედვით:
+                        </p>
+                    </div>
+                    <div class="main-box-texts-el">
+                        <ul>
+                            {% for category in categories %}
+                                <li>
+                                    <a href="{{ url_for('publications.publication', category_id=category.id) }}">
+                                        {{ category.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

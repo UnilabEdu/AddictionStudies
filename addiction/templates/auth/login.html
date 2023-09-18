@@ -1,35 +1,34 @@
-{%extends "layouts/base.html"%}
-{%block head%}
-შესვლა
-{%endblock%}
+{% extends "layouts/base.html" %}
 
+{% block body %}
 
-{%block content%}
+    <main>
+        <div class="main-container">
+            <div class="main-box">
+                <h2 class="main-box-subtitle">ავტორიზაცია</h2>
+                <div class="main-box-line"></div>
+                <div class="main-box-texts">
+                    <div class="main-box-texts-el">
 
-    <div class="d-flex justify-content-center mt-5 mb-5">
-    <div class="col-md-5 col-lg-4 mt-3">
-        {%for field, error in form.errors.items()%}
-            <div class="alert alert-danger" role="alert">
-            <span class="badge rounded-pill text-bg-danger">შეცდომა</span>
-            {{error}}
-            </div>
-        {%endfor%}
-            <form method="POST">
-            {{form.hidden_tag()}}
-            <div class="mb-3">
-                {{form.login(class="form-control", placeholder=form.login.label.text)}}
-            </div>
-            <div class="mb-3">
-                {{form.password(class="form-control", placeholder=form.password.label.text)}}
-            </div>
-            <div class="mb-3">
-                {{form.submit(class="btn btn-primary mt-2")}}
-            </div>   
-            <div>
-                <a href="{{url_for('auth.forgot_password')}}">პაროლი დაგავიწყდათ?</a>
-            </div>
-        </form>
-    </div>
-    </div>
+                        {% for field, error in form.errors.items() %}
+                            <p> {{ error | join(',') }}</p>
+                        {% endfor %}
 
-{%endblock%}
+                        <form method="post">
+                            {{ form.hidden_tag() }}
+                            <span>{{ form.login.label.text }}</span><br>
+                            {{ form.login(style="width: 80%; height: 25px") }}
+                            <br>
+                            <span>{{ form.password.label.text }}</span><br>
+                            {{ form.password(style="width: 80%; height: 25px") }}
+                            <br>
+                            {{ form.submit(style="height: 40px;width: 90px;margin-top: 10px;border: none;
+                            background-color: #ff9900;font-weight: 700;cursor: pointer;") }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
